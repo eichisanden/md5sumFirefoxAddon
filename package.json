@@ -5,5 +5,12 @@
   "description": "get md5sum",
   "author": "",
   "license": "MPL 2.0",
-  "version": "0.1"
+  "version": "0.1",
+
+  "commentout":
+  {
+      "permissions": {
+          "cross-domain-content": ["https://support.mozilla.org/", "https://wwww.mozilla.org/"]
+      }
+  }
 }
