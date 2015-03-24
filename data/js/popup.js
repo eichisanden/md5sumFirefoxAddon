@@ -14,14 +14,20 @@
       reader = new FileReader();
       reader.onload = (function(theFile) {
         return function(e) {
-          var div, md5sum;
-          md5sum = MD5_hexhash(e.target.result);
+          var div, md5sum, md5sumLf, bytes, encoding, codeString;
+
+          bytes = new Uint8Array(e.target.result);
+          encoding = Encoding.detect(bytes);
+          codeString = Encoding.codeToString(bytes);
+          md5sum = MD5_hexhash(codeString);
+          md5sumLf = MD5_hexhash(codeString.replace(/\r\n?/g, "\n"));
+
           div = document.createElement('div');
-          div.innerHTML = [md5sum, '&nbsp;&nbsp;&nbsp;', theFile.name].join('');
+          div.innerHTML = [md5sum, '&nbsp;&nbsp;&nbsp;', md5sumLf, '&nbsp;&nbsp;&nbsp;', encoding, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', theFile.name].join('');
           return document.getElementById('list').insertBefore(div, null);
         };
       })(f);
-      _results.push(reader.readAsBinaryString(f));
+      _results.push(reader.readAsArrayBuffer(f));
     }
     return _results;
   };
