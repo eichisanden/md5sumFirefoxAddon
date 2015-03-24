@@ -14,17 +14,25 @@
       reader = new FileReader();
       reader.onload = (function(theFile) {
         return function(e) {
-          var div, md5sum, md5sumLf, bytes, encoding, codeString;
+          var div, md5sum, md5sumLf, bytes, encoding, codeString, newline;
 
           bytes = new Uint8Array(e.target.result);
           encoding = Encoding.detect(bytes);
           codeString = Encoding.codeToString(bytes);
           md5sum = MD5_hexhash(codeString);
           md5sumLf = MD5_hexhash(codeString.replace(/\r\n?/g, "\n"));
+          if (codeString.indexOf("\r\n", 0) > 0) {
+            newline = "CRLF";
+          } else if (codeString.indexOf("\n", 0) > 0) {
+            newline = "LF";
+          } else {
+            newline = "CR";
+          }
 
-          div = document.createElement('div');
-          div.innerHTML = [md5sum, '&nbsp;&nbsp;&nbsp;', md5sumLf, '&nbsp;&nbsp;&nbsp;', encoding, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', theFile.name].join('');
-          return document.getElementById('list').insertBefore(div, null);
+          tr = document.createElement('tr');
+        //   div.innerHTML = [md5sum, '&nbsp;&nbsp;&nbsp;', md5sumLf, '&nbsp;&nbsp;&nbsp;', encoding, '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', theFile.name].join('');
+          tr.innerHTML = "<td>" + md5sum + "</td><td>" + md5sumLf + "</td><td>" + encoding + "</td><td>" + newline + "</td><td>" + theFile.name + "</td>";
+          return document.getElementById('list').insertBefore(tr, null);
         };
       })(f);
       _results.push(reader.readAsArrayBuffer(f));

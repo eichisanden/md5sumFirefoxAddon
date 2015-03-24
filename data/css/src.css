@@ -1,6 +1,15 @@
 body {
 	font-size: 15px;
 }
+
 code {
 	font-family: "Ricty Discord",Ricty,"Migu 1M","Source Code Pro",Inconsolata,consolas, monospace;
+}
+
+th, td {
+	text-align: left;
+}
+
+td {
+	padding-right: 12px;
 }

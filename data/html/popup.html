@@ -5,13 +5,21 @@
 <title>MD5SUM</title>
 <link rel="stylesheet" href="../css/popup.css">
 </head>
-<body style="width:600px;">
+<body>
 <div id="drop_zone" class="dropzone">
 	Drag and drop files here.
 </div>
-<output id="list" class="mono outlist">
-	<div><span style="margin-right: 16em; font-weight: bold;">md5sum</span><span style="margin-right: 13.5em; font-weight: bold;">md5sum(LF)</span><span style="margin-right: 1em; font-weight: bold;">Encoding</span><span style="font-weight: bold;">FileName</span></div>
-</output>
+<table id="list" class="mono outlist">
+<thead>
+	<tr>
+		<th style="width:300px;text-align:left;">md5sum</th>
+		<th style="width:300px;text-align:left;">md5sum(LF)</th>
+		<th style="width:100px;text-align:left;">文字コード</th>
+		<th style="width:100px;text-align:left;">改行コード</th>
+		<th style="text-align:left;">ファイル名</th>
+	</tr>
+</thead>
+</table>
 <script src="../js/lib/md5.js"></script>
 <script src="../js/lib/encoding.js"></script>
 <script src="../js/popup.js"></script>
